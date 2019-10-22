@@ -36,14 +36,23 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
+                <version>9.4.9.v20180320</version>
                 <configuration>
-                    <!-- On some configs this causes shutdown of context on -->
-                    <!-- a page load so disabled. -->
-                    <!-- <reload>automatic</reload> -->
-                    <!-- <scanIntervalSeconds>1</scanIntervalSeconds> -->
+                    <reload>automatic</reload>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
                 </configuration>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.eclipse.jetty</groupId>-->
+<!--                <artifactId>jetty-maven-plugin</artifactId>-->
+<!--                <version>${jetty.version}</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; On some configs this causes shutdown of context on &ndash;&gt;-->
+<!--                    &lt;!&ndash; a page load so disabled. &ndash;&gt;-->
+<!--                    &lt;!&ndash; <reload>automatic</reload> &ndash;&gt;-->
+<!--                    &lt;!&ndash; <scanIntervalSeconds>1</scanIntervalSeconds> &ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
