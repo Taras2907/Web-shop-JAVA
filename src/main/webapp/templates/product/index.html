@@ -35,7 +35,7 @@
             <div class="list-group list-group-flush container-fluid">
                 <span>Category</span>
                 <a th:href="@{/product(category=${category.getId()})}" class="list-group-item list-group-item-action bg-light" th:each="category,iterStat : ${categories}" th:text="${category.getName()}">Category...</a>
-                <a href="/" class="list-group-item list-group-item-action bg-light">Show all...</a>
+                <a href="/" class="list-group-item list-group-item-action bg-light">Show all.</a>
             </div>
         </div>
 
