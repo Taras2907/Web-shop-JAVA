@@ -33,11 +33,16 @@
     <nav class="navbar navbar-inverse">
         <div class="w-25 bg-light border float-left navbar">
             <div class="list-group list-group-flush container-fluid">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Categories</a>
+                <span>Category</span>
+                <a th:href="@{/product(category=${category.getId()})}" class="list-group-item list-group-item-action bg-light" th:each="category,iterStat : ${categories}" th:text="${category.getName()}">Category...</a>
+                <a href="/" class="list-group-item list-group-item-action bg-light">Show all...</a>
             </div>
         </div>
 
         <div class="w-75 float-left navbar">
+            <div class="card" th:if="${category != null}">
+                <strong th:text="${category.name}">Category Title</strong>
+            </div>
 
             <div id="products" class="row">
                 <div class="col col-sm-12 col-md-6 col-lg-4 mb-4" th:each="prod,iterStat : ${products}">
