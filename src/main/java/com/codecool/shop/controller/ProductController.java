@@ -9,6 +9,7 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+import org.thymeleaf.util.NumberUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,19 +29,33 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
+        List<Product> products;
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         String categoryId = req.getParameter("category");
 
         if (categoryId != null) {
+            try {
+                ProductCategory productCategory = productCategoryDataStore.find(Integer.parseInt(categoryId));
+            } catch (NumberFormatException e) {
+                resp.sendRedirect(req.getContextPath());
+                return;
+            }
             ProductCategory productCategory = productCategoryDataStore.find(Integer.parseInt(categoryId));
-            List<Product> products = productDataStore.getBy(productCategory);
-            if (products.size()>0) {
+            products = productDataStore.getBy(productCategory);
+            if (products.size() > 0) {
                 context.setVariable("category", productCategory);
                 context.setVariable("products", products);
-                System.out.println(products);
+                engine.process("product/filtered.html", context, resp.getWriter());
+            } else {
+                resp.sendRedirect(req.getContextPath());
             }
+        } else {
+            products = productDataStore.getAll();
+            context.setVariable("products", products);
+            engine.process("product/index.html", context, resp.getWriter());
         }
 
 
@@ -49,6 +64,5 @@ public class ProductController extends HttpServlet {
         // params.put("category", productCategoryDataStore.find(1));
         // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         // context.setVariables(params);
-        engine.process("product/index.html", context, resp.getWriter());
     }
 }
