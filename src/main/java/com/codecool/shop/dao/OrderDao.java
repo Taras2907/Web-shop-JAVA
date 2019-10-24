@@ -1,6 +1,6 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.order.Order;
+import com.codecool.shop.model.Order;
 
 public interface OrderDao {
     void addOrder(Order order);

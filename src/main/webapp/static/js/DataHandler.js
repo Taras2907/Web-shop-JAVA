@@ -34,13 +34,22 @@ export let dataHandler = {
             headers:{'Content-Type':'application/json'},
             credentials: 'same-origin',
             body:data
-        })
-            .then(response => response.json())
+        }).then(response => response.json())
             .then(json_response => callback(json_response));
     },
-    getOrderProducts(id, callback){
-        this.apiGet(`/cart?id=${id}`, (response)=>{  // ?id=1 & id2=2 for more parameters
+    getOrderProducts( callback){
+        this.apiGet(`/cart`, (response)=>{
             callback(response)
         })
+    },
+    addProductToCart(id, callback){
+        this.apiPut(`/cart`, id, (response)=>{
+            callback(response)
+        })
+    },
+    deleteProductFromCart(id, callback){
+        this.apiDelete("/cart", id, (response)=>{
+            callback(response)
+        });
     }
 };
