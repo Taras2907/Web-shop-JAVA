@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="copy">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content w-150">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Your products in cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container" id="cartTable">
+
+                    </div>
+                </div>
+                <div th:replace="carousel.html::copy"></div>
+                <div class="modal-footer">
+                    <button id="makeOrder" type="button" class="btn btn-primary  btn-small">
+                        <a href="/order/payment" style="text-decoration: none; color:inherit">Make an order</a>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- End of modal -->
+
+
+</div>
+
+
+</body>
+</html>

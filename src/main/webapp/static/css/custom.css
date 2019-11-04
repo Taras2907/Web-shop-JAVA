@@ -62,10 +62,10 @@
 }
 .carousel-control-next, .carousel-control-prev
 {
-    width: 50px;
+    width: 50px !important;
 }
 .carousel-control-prev-icon, .carousel-control-next-icon
 {
-    background-color: blue;
-    border-radius: 75px;
+    background-color: blue !important;
+    border-radius: 75px !important;
 }
