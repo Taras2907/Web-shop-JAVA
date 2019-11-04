@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <title>Codecool Shop</title>
-    <!--Our javaScript -->
-    <script type="module" src="static/js/Main.js"></script>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -31,15 +29,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">AllePaki</a>
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a id="cartButton" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Cart</a>
-
-            </li>
-        </ul>
-    </nav>
+    <div th:replace="topnav.html :: copy"></div>
 
     <nav class="navbar navbar-inverse">
         <div class="w-25 bg-light border h-100 navbar">
@@ -55,8 +45,7 @@
                 <strong th:text="${category.name}">Category Title</strong>
             </div>
 
-
-            <div id="F" class="row">
+            <div id="products" class="row">
                 <div class="col col-sm-12 col-md-6 col-lg-4 mb-4" th:each="prod,iterStat : ${products}">
                     <div class="card">
                         <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
@@ -69,7 +58,7 @@
                                 <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                             </div>
                             <div class="card-text">
-                                <button class="btn btn-primary" th:data-id="${prod.id}">Add to cart</button>
+                                <a class="btn btn-success" href="#">Add to cart</a>
                             </div>
                         </div>
                     </div>
