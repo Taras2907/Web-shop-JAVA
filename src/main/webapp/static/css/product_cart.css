@@ -1,0 +1,11 @@
+.truncate-overflow {
+    -webkit-line-clamp: 3;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.card-header {
+    height: 10rem;
+}
