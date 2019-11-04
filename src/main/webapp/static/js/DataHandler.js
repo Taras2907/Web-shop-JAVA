@@ -33,7 +33,7 @@ export let dataHandler = {
             method: "DELETE",
             headers:{'Content-Type':'application/json'},
             credentials: 'same-origin',
-            body:data
+            body:JSON.stringify(data)
         }).then(response => response.json())
             .then(json_response => callback(json_response));
     },

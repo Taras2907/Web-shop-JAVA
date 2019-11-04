@@ -23,13 +23,14 @@ public class Order {
         return productList;
     }
 
-    public void removeProduct(Product product) {
-        if (productList.get(product) > 1){
+    public void removeProduct(Product product, int productQuantity) {
+        if (productList.get(product) > 1 && productQuantity == 1){
             productList.put(product, productList.get(product) - 1);
         }else {
             productList.remove(product);
         }
     }
+
     public void addProduct(Product product) {
         if (productList.containsKey(product)){
             productList.put(product, productList.get(product) + 1);

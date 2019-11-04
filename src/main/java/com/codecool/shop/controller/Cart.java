@@ -6,7 +6,9 @@ import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Order;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet (urlPatterns = {"/cart"})
 public class Cart extends HttpServlet {
@@ -67,15 +72,20 @@ public class Cart extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         BufferedReader reader = request.getReader();
-        int testOrder = Integer.parseInt(reader.readLine());
+        Gson gson = new Gson();
+        Type type = new TypeToken<Map<String, Integer>>(){}.getType();
+        Map<String, Integer> myMap = gson.fromJson(reader.readLine(), type);
 
-        Product productToRemove =  productDaoMem.find(testOrder);
+        int productId = myMap.get("id");
+        int productQuantity = myMap.get("quantity");
 
-        orderDaoMem.getOrder(1).removeProduct(productToRemove);// get order number from database
+        Product productToRemove =  productDaoMem.find(productId);
+
+        orderDaoMem.getOrder(1).removeProduct(productToRemove, productQuantity);// get order number from database
         System.out.println(orderDaoMem.getOrder(1).getProductList());
 
-        //response for json
-        String employeeJsonString = new Gson().toJson("200 everything is ok");
+//        response for json
+        String employeeJsonString = gson.toJson("200 everything is ok");
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

@@ -35,7 +35,8 @@
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">AllePaki</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Cart</a>
+                <a id="cartButton" class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Cart</a>
+
             </li>
         </ul>
     </nav>
@@ -53,9 +54,7 @@
             <div class="card" th:if="${category != null}">
                 <strong th:text="${category.name}">Category Title</strong>
             </div>
-            <button id="cartButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Cart
-            </button>
+
 
             <div id="F" class="row">
                 <div class="col col-sm-12 col-md-6 col-lg-4 mb-4" th:each="prod,iterStat : ${products}">
@@ -70,7 +69,7 @@
                                 <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                             </div>
                             <div class="card-text">
-                                <button class="btn btn-success" th:data-id="${prod.id}">Add to cart</button>
+                                <button class="btn btn-primary" th:data-id="${prod.id}">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -84,8 +83,8 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content w-150">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Your products in cart</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -93,25 +92,270 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table id="cartTable">
-<!--                    <thead>-->
-<!--                        <tr>-->
-<!--                            <th>Name</th>-->
-<!--                            <th>Quantity</th>-->
-<!--                            <th>Price</th>-->
-<!--                        </tr>-->
-<!--                    </thead>-->
-                    <tbody>
+                <div class="container" id="cartTable">
 
-                    </tbody>
-                </table>
+                </div>
             </div>
+<!-- Carousel -->
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container d-block ml-4 mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-3">
+                                    <div class="container no-gutters">
+                                        <div class="row no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_1.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add data-productid="4">add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <div class="container no-gutters">
+                                        <div class="row no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_1.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters"data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="container  no-gutters">
+                                        <div class="row-2 no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_1.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="container  no-gutters">
+                                        <div class="row-2 no-gutters ">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_1.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container d-block ml-4 mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-3">
+                                    <div class="container no-gutters">
+                                        <div class="row no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_2.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <div class="container no-gutters">
+                                        <div class="row no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_2.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="container  no-gutters">
+                                        <div class="row-2 no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_2.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="container  no-gutters">
+                                        <div class="row-2 no-gutters ">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_2.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" >add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container d-block ml-4 mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-3">
+                                    <div class="container no-gutters">
+                                        <div class="row no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_3.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row  no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <div class="container no-gutters">
+                                        <div class="row no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_3.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="container  no-gutters">
+                                        <div class="row-2 no-gutters text-center">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_3.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="container  no-gutters">
+                                        <div class="row-2 no-gutters ">
+                                            <div class="col-4">
+                                                <img class=" img-thumbnail" src="/static/img/product_3.jpg" alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>Amazon Fire HD 8</small><br>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <small>367.0 PLN</small>
+                                        </div>
+                                        <div class="row no-gutters text-center">
+                                            <button class="btn btn-primary btn-sm no-gutters" data-add>add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next"  href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+<!-- end of Carousel -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-success btn-small" data-dismiss="modal">Make an order</button>
+                <button id="makeOrder" type="button" class="btn btn-primary  btn-small">
+                    <a href="/order/payment" style="text-decoration: none; color:inherit">Make an order</a>
+                </button>
             </div>
         </div>
     </div>
 </div>
+<!-- End of modal -->
 
     <div th:replace="footer.html :: copy"></div>
 

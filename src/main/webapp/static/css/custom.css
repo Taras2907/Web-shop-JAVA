@@ -60,3 +60,12 @@
 {
     margin: 0 0 11px;
 }
+.carousel-control-next, .carousel-control-prev
+{
+    width: 50px;
+}
+.carousel-control-prev-icon, .carousel-control-next-icon
+{
+    background-color: blue;
+    border-radius: 75px;
+}
