@@ -3,10 +3,13 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -36,8 +39,14 @@ public class CategoryController extends HttpServlet {
         }
     }
 
-    private boolean isValidRequestParameters(HttpServletRequest req) {
-        String categoryId = req.getParameter("category");
+    //TODO:
+    private boolean isValidRequestParameters(HttpServletRequest req, String parameter) {
+        String supplierId = req.getParameter(parameter);
+        if (supplierId != null && canConvertToInteger(supplierId)){
+            Product supplierProducts = productDataStore.getBy()
+        }
+
+        String categoryId = req.getParameter(parameter);
         if (categoryId != null && canConvertToInteger(categoryId)) {
             ProductCategory productCategory = productCategoryDataStore.find(Integer.parseInt(categoryId));
             List<Product> products = productDataStore.getBy(productCategory);
