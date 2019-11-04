@@ -36,7 +36,7 @@
                 <p>Let us know what you're looking for</p>
                 <li class="active">
                     <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
-                    <ul class="collapse list-unstyled" id="categoriesSubmenu">
+                    <ul class="collapse list-unstyled " id="categoriesSubmenu">
                         <li th:each="category,iterStat : ${categories}">
                             <a th:href="@{/product(category=${category.getId()})}" th:text="${category.getName()}">Category...</a>
                         </li>
@@ -46,6 +46,18 @@
 <!--                        <li>-->
 <!--                            <a href="#">Home 3</a>-->
 <!--                        </li>-->
+                    </ul>
+                    <a href="#suppliersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Suppliers</a>
+                    <ul class="collapse list-unstyled " id="suppliersSubmenu">
+                        <li th:each="supplier,iterStat : ${suppliers}">
+                            <a th:href="@{/product(supplier=${supplier.getId()})}" th:text="${supplier.getName()}">Supplier..</a>
+                        </li>
+                        <!--                        <li>-->
+                        <!--                            <a href="#">Home 2</a>-->
+                        <!--                        </li>-->
+                        <!--                        <li>-->
+                        <!--                            <a href="#">Home 3</a>-->
+                        <!--                        </li>-->
                     </ul>
                 </li>
 
