@@ -5,7 +5,6 @@ function init() {
     dom.addListenerToCartButton();
 
 }
-
 $(document).ready(function () {
     init();
 

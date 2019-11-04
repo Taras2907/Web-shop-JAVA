@@ -14,6 +14,7 @@ export let dom = {
         let cartButton = document.querySelector("#cartButton");
         cartButton.addEventListener("click", function () {
             dataHandler.getOrderProducts(function (products) {
+                console.log(products);
                 dom.createTableOfProducts(products);
             });
         })
