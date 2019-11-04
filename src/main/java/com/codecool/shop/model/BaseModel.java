@@ -41,6 +41,10 @@ public class BaseModel {
 
     public void setDescription(String description) {
         this.description = description;
+        String hello = "hello" +
+                "kornel" +
+                "dziki" +
+                "pies";
     }
 
     @Override
