@@ -2,11 +2,10 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.OrderDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.OrderDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Order;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -18,7 +17,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet (urlPatterns = {"/cart"})
