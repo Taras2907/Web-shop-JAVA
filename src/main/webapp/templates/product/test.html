@@ -23,13 +23,11 @@
     <title>Sidebar</title>
 </head>
 <body>
-<!--    <div th:replace="topnav.html :: copy"></div>-->
-
     <div class="wrapper">
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Allepaki</h3>
+                <h3><a href="/">Allepaki</a></h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -40,16 +38,8 @@
                         <li th:each="category,iterStat : ${categories}">
                             <a th:href="@{/product(category=${category.getId()})}" th:text="${category.getName()}">Category...</a>
                         </li>
-<!--                        <li>-->
-<!--                            <a href="#">Home 2</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a href="#">Home 3</a>-->
-<!--                        </li>-->
                     </ul>
                 </li>
-
-
 
             </ul>
         </nav>
@@ -103,15 +93,8 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
     </div>
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -30,7 +30,7 @@ public class CategoryController extends HttpServlet {
 
         if (isValidRequestParameters(req)) {
             setContext(context, req);
-            engine.process("product/index.html", context, resp.getWriter());
+            engine.process("product/test.html", context, resp.getWriter());
         } else {
             resp.sendRedirect(req.getContextPath());
         }
