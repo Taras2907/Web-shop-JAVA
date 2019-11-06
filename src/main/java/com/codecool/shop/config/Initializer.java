@@ -3,16 +3,25 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.UserDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.User;
+import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.function.Function;
 
 @WebListener
@@ -23,6 +32,10 @@ public class Initializer implements ServletContextListener {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        UserDao userDataBase = UserDaoMem.getInstance();
+
+        try { addUsersToDataFromDataBase(userDataBase); }
+        catch (SQLException e) { e.printStackTrace(); }
 
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
@@ -48,5 +61,41 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Dell Inspiron 5570", 2800, "PLN", "Dell Inspiron 5570 is a Windows 10 laptop. Core i7 processor. 4GB RAM. Packs 1TB of HDD storage.", laptop, dell));
         productDataStore.add(new Product("Lenovo IdeaPad 330", 1599, "PLN", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", laptop, lenovo));
         productDataStore.add(new Product("Dell XPS", 12700, "PLN", "Dell's XPS laptops are considered the gold standard when it comes to premium notebooks.", laptop, dell));
+    }
+
+    private void addUsersToDataFromDataBase(UserDao userDataBase) throws SQLException {
+        DataSource data = connect();
+
+        try {
+            //TODO: we can move some code to other classes like: addUsersToDataFromDataBase
+            Connection connection = data.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM \"user\"");
+            while(rs.next()){
+                userDataBase.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("secret_key"),
+                        rs.getString("name")));
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private DataSource connect() throws SQLException {
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+
+        dataSource.setDatabaseName(System.getenv("DATABASE"));
+        dataSource.setUser(System.getenv("USERNAME"));
+        dataSource.setPassword(System.getenv("PASSWORD"));
+
+        dataSource.getConnection().close();
+
+        return dataSource;
     }
 }
