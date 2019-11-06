@@ -3,9 +3,9 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -13,6 +13,7 @@ import com.codecool.shop.model.Supplier;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.function.Function;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -39,7 +40,6 @@ public class Initializer implements ServletContextListener {
 
         ProductCategory laptop = new ProductCategory("Laptop", "Hardware", "A computer that is portable and suitable for use while travelling.");
         productCategoryDataStore.add(laptop);
-
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", 220.8f, "PLN", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad 700", 1684, "PLN", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Helpful technical support.", tablet, lenovo));

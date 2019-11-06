@@ -20,6 +20,7 @@ export let dom = {
         })
     },
     createTableOfProducts: function (products) {
+
         let tbody = document.querySelector("#cartTable");
         let tableRows = dom.createTableRows(products.length, products);
         tbody.innerHTML = tableRows;

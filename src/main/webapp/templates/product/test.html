@@ -24,13 +24,11 @@
     <title>Sidebar</title>
 </head>
 <body>
-<!--    <div th:replace="topnav.html :: copy"></div>-->
-
     <div class="wrapper">
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Allepaki</h3>
+                <h3><a href="/">Allepaki</a></h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -41,12 +39,6 @@
                         <li th:each="category,iterStat : ${categories}">
                             <a th:href="@{/product(category=${category.getId()})}" th:text="${category.getName()}">Category...</a>
                         </li>
-<!--                        <li>-->
-<!--                            <a href="#">Home 2</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a href="#">Home 3</a>-->
-<!--                        </li>-->
                     </ul>
                     <a href="#suppliersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Suppliers</a>
                     <ul class="collapse list-unstyled " id="suppliersSubmenu">
@@ -61,8 +53,6 @@
                         <!--                        </li>-->
                     </ul>
                 </li>
-
-
 
             </ul>
         </nav>
@@ -82,7 +72,7 @@
                     <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Logg in</a>
+                                <a class="nav-link" href="/login">Logg in</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="cartButton" href="#"><i class="fas fa-shopping-cart" data-toggle="modal" data-target="#exampleModal"></i></a>
@@ -116,16 +106,11 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <div th:replace="/product/modal_cart.html:: copy"></div>
 
 
     </div>
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
