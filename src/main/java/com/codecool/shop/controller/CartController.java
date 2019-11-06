@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet (urlPatterns = {"/cart"})
-public class Cart extends HttpServlet {
+public class CartController extends HttpServlet {
     private ProductDao productDaoMem =  ProductDaoMem.getInstance();
     private OrderDao orderDaoMem = OrderDaoMem.getInstance();
     Order order = new Order();
