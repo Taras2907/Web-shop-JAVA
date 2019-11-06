@@ -3,8 +3,8 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import org.thymeleaf.TemplateEngine;
@@ -30,7 +30,7 @@ public class CategoryController extends HttpServlet {
 
         if (isValidRequestParameters(req)) {
             setContext(context, req);
-            engine.process("product/index.html", context, resp.getWriter());
+            engine.process("product/test.html", context, resp.getWriter());
         } else {
             resp.sendRedirect(req.getContextPath());
         }

@@ -1,11 +1,9 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.implementation.OrderDaoMem;
-import com.codecool.shop.model.Product;
+import com.codecool.shop.dao.implementation.localMemory.OrderDaoMem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Order {

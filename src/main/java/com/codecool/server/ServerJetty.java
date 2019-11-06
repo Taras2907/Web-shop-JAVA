@@ -25,11 +25,14 @@ public class ServerJetty {
 
         final SslContextFactory sslContextFactory = new SslContextFactory("src/mykey.jks");
         sslContextFactory.setKeyStorePassword("katamaran29");
+
         final HttpConfiguration httpsConfiguration = new HttpConfiguration(httpConfiguration);
         httpsConfiguration.addCustomizer(new SecureRequestCustomizer());
+
         final ServerConnector httpsConnector = new ServerConnector(server,
                 new SslConnectionFactory(sslContextFactory, HttpVersion.HTTP_1_1.asString()),
                 new HttpConnectionFactory(httpsConfiguration));
+
         httpsConnector.setPort(8443);
         server.addConnector(httpsConnector);
 
