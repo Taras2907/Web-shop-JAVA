@@ -1,10 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.SupplierDaoMem;
@@ -12,6 +9,7 @@ import com.codecool.shop.dao.implementation.localMemory.UserDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -25,10 +23,10 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/product"})
 public class CategoryController extends HttpServlet {
-    private ProductDao productDataStore = ProductDaoMem.getInstance();
-    private ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    private SupplierDao supplierDaoMem = SupplierDaoMem.getInstance();
-    UserDao userDataBase = UserDaoMem.getInstance();
+    private Dao<Product> productDataStore = ProductDaoMem.getInstance();
+    private Dao<ProductCategory> productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+    private Dao<Supplier> supplierDaoMem = SupplierDaoMem.getInstance();
+    Dao<User> userDataBase = UserDaoMem.getInstance();
 
     //setting up users
 
@@ -50,14 +48,14 @@ public class CategoryController extends HttpServlet {
         String supplierId = req.getParameter("supplier");
         if (supplierId != null && canConvertToInteger(supplierId)){
             Supplier supplier = supplierDaoMem.find(Integer.parseInt(supplierId));
-            List<Product> productsBySupplier = productDataStore.getBy(supplier);
+            List<Product> productsBySupplier =ProductDaoMem.getInstance().getBy(supplier);
             return productsBySupplier.size() > 0;
         }
 
         String categoryId = req.getParameter("category");
         if (categoryId != null && canConvertToInteger(categoryId)) {
             ProductCategory productCategory = productCategoryDataStore.find(Integer.parseInt(categoryId));
-            List<Product> products = productDataStore.getBy(productCategory);
+            List<Product> products = ProductDaoMem.getInstance().getBy(productCategory);
             return products.size() > 0;
         }
 
@@ -95,7 +93,7 @@ public class CategoryController extends HttpServlet {
         if (categoryId != null){
             productCategory = productCategoryDataStore.find(Integer.parseInt(categoryId));
             context.setVariable("category", productCategory);
-            products = productDataStore.getBy(productCategory);
+            products = ProductDaoMem.getInstance().getBy(productCategory);
             context.setVariable("products", products);
         }
 

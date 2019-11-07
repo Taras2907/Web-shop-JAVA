@@ -1,7 +1,6 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.Dao;
 import com.codecool.shop.dao.implementation.localMemory.OrderDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
 import com.codecool.shop.model.Product;
@@ -21,8 +20,8 @@ import java.util.Map;
 
 @WebServlet (urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
-    private ProductDao productDaoMem =  ProductDaoMem.getInstance();
-    private OrderDao orderDaoMem = OrderDaoMem.getInstance();
+    private Dao<Product> productDaoMem =  ProductDaoMem.getInstance();
+    private Dao<Order> orderDaoMem = OrderDaoMem.getInstance();
     Order order = new Order();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -39,8 +38,8 @@ public class CartController extends HttpServlet {
         BufferedReader reader = request.getReader();
         int testOrder = Integer.parseInt(reader.readLine());
         Product newProductToOurOrder =  productDaoMem.find(testOrder);
-        orderDaoMem.getOrder(1).addProduct(newProductToOurOrder);
-        System.out.println(orderDaoMem.getOrder(1).getProductList());
+        orderDaoMem.find(1).addProduct(newProductToOurOrder);
+        System.out.println(orderDaoMem.find(1).getProductList());
 
 
         //response for json
@@ -57,8 +56,8 @@ public class CartController extends HttpServlet {
         int testOrder = Integer.parseInt(reader.readLine());
         Product newProductToOurOrder =  productDaoMem.find(testOrder);
 
-        orderDaoMem.getOrder(testOrder).addProduct(newProductToOurOrder);
-        System.out.println(orderDaoMem.getOrder(testOrder).getProductList());
+        orderDaoMem.find(testOrder).addProduct(newProductToOurOrder);
+        System.out.println(orderDaoMem.find(testOrder).getProductList());
 
         //response for json
         String employeeJsonString = new Gson().toJson(" everything is ok");
@@ -80,8 +79,8 @@ public class CartController extends HttpServlet {
 
         Product productToRemove =  productDaoMem.find(productId);
 
-        orderDaoMem.getOrder(1).removeProduct(productToRemove, productQuantity);// get order number from database
-        System.out.println(orderDaoMem.getOrder(1).getProductList());
+        orderDaoMem.find(1).removeProduct(productToRemove, productQuantity);// get order number from database
+        System.out.println(orderDaoMem.find(1).getProductList());
 
 //        response for json
         String employeeJsonString = gson.toJson("200 everything is ok");
