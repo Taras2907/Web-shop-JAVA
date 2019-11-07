@@ -26,7 +26,8 @@ public class RegistrationController extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String password = req.getParameter("user_name");
+        String password = req.getParameter("name");
+        String email = req.getParameter("email");
         String userName = req.getParameter("password");
 
         EncryptionDecryptionAES aes = EncryptionDecryptionAES.getInstance();
@@ -39,7 +40,7 @@ public class RegistrationController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        engine.process("product/test.html", context, resp.getWriter());
+        engine.process("product/login.html", context, resp.getWriter());
     }
 }
 

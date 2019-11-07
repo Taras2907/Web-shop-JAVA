@@ -44,13 +44,14 @@ public class CartController extends HttpServlet {
 
 
         //response for json
-        String employeeJsonString = new Gson().toJson("200 everything is ok");
+        String employeeJsonString = new Gson().toJson(" everything is ok");
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         out.print(employeeJsonString);
         out.flush();
     }
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         BufferedReader reader = request.getReader();
         int testOrder = Integer.parseInt(reader.readLine());
@@ -60,7 +61,7 @@ public class CartController extends HttpServlet {
         System.out.println(orderDaoMem.getOrder(testOrder).getProductList());
 
         //response for json
-        String employeeJsonString = new Gson().toJson("200 everything is ok");
+        String employeeJsonString = new Gson().toJson(" everything is ok");
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

@@ -13,7 +13,7 @@ export let dataHandler = {
             method: "POST",
             headers:{'Content-Type':'application/json'},
             credentials: 'same-origin',
-            body:data
+            body:JSON.stringify(data)
         })
             .then(response => response.json())
             .then(json_response => callback(json_response));
@@ -51,5 +51,10 @@ export let dataHandler = {
         this.apiDelete("/cart", id, (response)=>{
             callback(response)
         });
+    },
+    checkUserPassword(data, callback){
+        this.apiPost("/login", data, (response)=>{
+            callback(response)
+        })
     }
 };
