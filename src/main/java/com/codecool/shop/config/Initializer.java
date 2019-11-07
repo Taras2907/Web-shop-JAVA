@@ -31,9 +31,6 @@ public class Initializer implements ServletContextListener {
         Dao<Supplier> supplierDataStore = SupplierDaoMem.getInstance();
         Dao<User> userDataBase = UserDaoMem.getInstance();
 
-        try { addUsersToDataFromDataBase(userDataBase); }
-        catch (SQLException e) { e.printStackTrace(); }
-
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         supplierDataStore.add(amazon);
@@ -60,39 +57,5 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Dell XPS", 12700, "PLN", "Dell's XPS laptops are considered the gold standard when it comes to premium notebooks.", laptop, dell));
     }
 
-    private void addUsersToDataFromDataBase(Dao<User> userDataBase) throws SQLException {
-        DataSource data = connect();
 
-        try {
-            //TODO: we can move some code to other classes like: addUsersToDataFromDataBase
-            Connection connection = data.getConnection();
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM \"user\"");
-            while(rs.next()){
-                userDataBase.add(new User(
-                        rs.getInt("id"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getInt("order_id"),
-                        rs.getString("name")));
-            }
-            rs.close();
-            stmt.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private DataSource connect() throws SQLException {
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-
-        dataSource.setDatabaseName(System.getenv("DATABASE"));
-        dataSource.setUser(System.getenv("USERNAME"));
-        dataSource.setPassword(System.getenv("PASSWORD"));
-
-        dataSource.getConnection().close();
-
-        return dataSource;
-    }
 }

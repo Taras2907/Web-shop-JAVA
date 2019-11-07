@@ -1,11 +1,12 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.*;
-import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
+import com.codecool.shop.dao.Dao;
+import com.codecool.shop.dao.database.ProductCategoryDaoDB;
+import com.codecool.shop.dao.database.ProductDaoDB;
+import com.codecool.shop.dao.database.SupplierDaoDB;
+import com.codecool.shop.dao.database.UserDaoDB;
 import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
-import com.codecool.shop.dao.implementation.localMemory.SupplierDaoMem;
-import com.codecool.shop.dao.implementation.localMemory.UserDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -23,10 +24,9 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/product"})
 public class CategoryController extends HttpServlet {
-    private Dao<Product> productDataStore = ProductDaoMem.getInstance();
-    private Dao<ProductCategory> productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    private Dao<Supplier> supplierDaoMem = SupplierDaoMem.getInstance();
-    Dao<User> userDataBase = UserDaoMem.getInstance();
+    private Dao<ProductCategory> productCategoryDataStore = ProductCategoryDaoDB.getInstance();
+    private Dao<Supplier> supplierDaoMem = SupplierDaoDB.getInstance();
+
 
     //setting up users
 
@@ -43,12 +43,11 @@ public class CategoryController extends HttpServlet {
         }
     }
 
-    //TODO:
     private boolean isValidRequestParameters(HttpServletRequest req) {
         String supplierId = req.getParameter("supplier");
-        if (supplierId != null && canConvertToInteger(supplierId)){
+        if (supplierId != null && canConvertToInteger(supplierId)) {
             Supplier supplier = supplierDaoMem.find(Integer.parseInt(supplierId));
-            List<Product> productsBySupplier =ProductDaoMem.getInstance().getBy(supplier);
+            List<Product> productsBySupplier = ProductDaoMem.getInstance().getBy(supplier);
             return productsBySupplier.size() > 0;
         }
 
@@ -78,11 +77,10 @@ public class CategoryController extends HttpServlet {
         List<Supplier> suppliers = supplierDaoMem.getAll();
 
         //TODO: move the following validation into method
-        //It check which products must display and send to index
 
         String supplierId = req.getParameter("supplier");
         Supplier supplier;
-        if (supplierId != null){
+        if (supplierId != null) {
             supplier = supplierDaoMem.find(Integer.parseInt(supplierId));
             products = supplier.getProducts();
             context.setVariable("products", products);
@@ -90,7 +88,7 @@ public class CategoryController extends HttpServlet {
 
         String categoryId = req.getParameter("category");
         ProductCategory productCategory;
-        if (categoryId != null){
+        if (categoryId != null) {
             productCategory = productCategoryDataStore.find(Integer.parseInt(categoryId));
             context.setVariable("category", productCategory);
             products = ProductDaoMem.getInstance().getBy(productCategory);

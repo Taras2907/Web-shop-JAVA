@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.database.UserDaoDB;
 import com.codecool.shop.decryption.EncryptionDecryptionAES;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,24 +20,29 @@ import java.util.Map;
 public class LoginCheckController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         boolean isAUser = false;
+
         BufferedReader reader = req.getReader();
         Gson gson = new Gson();
-        Type type = new TypeToken<Map<String, String>>(){}.getType();
+        Type type = new TypeToken<Map<String, String>>() {}.getType();
         Map<String, String> myMap = gson.fromJson(reader.readLine(), type);
         String password = myMap.get("password");
-        String login = myMap.get("login");
-        System.out.println(password + "   " + login);
+        String email = myMap.get("login");
+
+
         EncryptionDecryptionAES aes = EncryptionDecryptionAES.getInstance();
-        //sql select password from user where userLogin = userName;
 
 
-        String nameFromDatabase = "name";
-        String passwordFromDatabase = "password";
-//        if (login.equals(nameFromDatabase)){
-//            isAUser = true;
+        if (UserDaoDB.getInstance().findByEmail(email) != null) {
 
+            String nameFromDatabase = UserDaoDB.getInstance().findByEmail(email).getEmail();
+            String passwordFromDatabase = UserDaoDB.getInstance().findByEmail(email).getPassword();
 
+            if (email.equals(nameFromDatabase) && password.equals(passwordFromDatabase)) {
+                isAUser = true;
+            }
+        }
 
         String isARegisteredUser = new Gson().toJson(isAUser);
         PrintWriter out = resp.getWriter();
@@ -46,3 +52,4 @@ public class LoginCheckController extends HttpServlet {
         out.flush();
     }
 }
+
