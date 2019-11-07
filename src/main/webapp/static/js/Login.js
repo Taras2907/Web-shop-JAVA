@@ -11,7 +11,7 @@ export let login = {
                 if (isARegisteredUser){
                     window.location.href = "http://localhost:8080/";
                 }else{
-                    window.location.href = "http://localhost:8080/login";
+                    //window.location.href = "http://localhost:8080/login";
                     let loginMessage = document.querySelector("#loginHelp");
                     loginMessage.innerHTML = "wrong password";
 
