@@ -5,13 +5,13 @@ public class User {
     private String email;
     private String password;
     private String name;
-    private String secretKey;
+    private int orderId;
 
-    public User(int id, String email, String password, String secretKey, String name){
+    public User(int id, String email, String password, Integer orderId, String name){
         this.id = id;
         this.email = email;
         this.password = password;
-        this.secretKey = secretKey;
+        this.orderId = orderId;
         this.name = name;
     }
 
@@ -23,5 +23,5 @@ public class User {
 
     public String getPassword() { return password; }
 
-    public String getSecretKey() { return secretKey; }
+    public int getOrderId() { return orderId; }
 }

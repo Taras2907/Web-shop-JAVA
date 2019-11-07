@@ -76,7 +76,7 @@ public class Initializer implements ServletContextListener {
                         rs.getInt("id"),
                         rs.getString("email"),
                         rs.getString("password"),
-                        rs.getString("secret_key"),
+                        rs.getInt("order_id"),
                         rs.getString("name")));
             }
             rs.close();
