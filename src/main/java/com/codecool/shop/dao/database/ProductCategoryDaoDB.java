@@ -15,7 +15,7 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
     private DataSource dataSource;
 
     private ProductCategoryDaoDB() {
-        init();
+        dataSource = init();
     }
 
     public static ProductCategoryDaoDB getInstance() {
@@ -25,12 +25,14 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
         return instance;
     }
 
-    private void init() {
+    private DataSource init() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
         dataSource.setDatabaseName(System.getenv("DATABASE"));
         dataSource.setUser(System.getenv("USERNAME"));
         dataSource.setPassword(System.getenv("PASSWORD"));
+
+        return dataSource;
     }
 
     @Override

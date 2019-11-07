@@ -14,15 +14,17 @@ public class SupplierDaoDB implements SupplierDao {
     private DataSource dataSource;
 
     private SupplierDaoDB() {
-        init();
+        dataSource = init();
     }
 
-    private void init() {
+    private DataSource init() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
         dataSource.setDatabaseName(System.getenv("DATABASE"));
         dataSource.setUser(System.getenv("USERNAME"));
         dataSource.setPassword(System.getenv("PASSWORD"));
+
+        return dataSource;
     }
 
     public static SupplierDaoDB getInstance() {

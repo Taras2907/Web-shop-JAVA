@@ -21,15 +21,17 @@ public class ProductDaoDB implements ProductDao {
 
 
     private ProductDaoDB() {
-        init();
+        dataSource = init();
     }
 
-    private void init() {
+    private DataSource init() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
         dataSource.setDatabaseName(System.getenv("DATABASE"));
         dataSource.setUser(System.getenv("USERNAME"));
         dataSource.setPassword(System.getenv("PASSWORD"));
+
+        return dataSource;
     }
 
     @Override
