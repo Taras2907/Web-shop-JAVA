@@ -57,7 +57,7 @@ export let dom = {
 
             table += thisRow;
         }
-        table += `<div class="row justify-content-end no-gutters "><div class="col-4 bg-success text-white rounded "><p class="text-center" style="color: white">Total sum: ${totalSum} PLN</p></div> </div>`;
+        table += `<div class="row justify-content-end no-gutters "><div class="col-4 bg-success text-white rounded "><p class="text-center" style="color: white !important">Total sum: ${totalSum} PLN</p></div> </div>`;
         return table;
     },
     addRelatedProductsToCart:function(){
