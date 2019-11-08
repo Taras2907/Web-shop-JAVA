@@ -1,12 +1,12 @@
 package com.codecool.shop.dao.implementation.localMemory;
 
-import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.Dao;
 import com.codecool.shop.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoMem implements UserDao {
+public class UserDaoMem implements Dao<User> {
     private List<User> users = new ArrayList<>();
     private static UserDaoMem instance = null;
 
@@ -28,13 +28,17 @@ public class UserDaoMem implements UserDao {
     }
 
     @Override
-    public User find(Integer id){
+    public User find(int id){
         return users.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
     }
 
-    @Override
-    public User find(String email){
+    public User findByEmail(String email){
         return users.stream().filter(user -> user.getEmail().equals(email)).findFirst().orElse(null);
+    }
+
+    @Override
+    public void remove(int id) {
+
     }
 
 }

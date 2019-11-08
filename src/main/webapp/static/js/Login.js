@@ -4,17 +4,17 @@ export let login = {
 
         let submitLoginButton = document.querySelector("#loginSubmit");
         submitLoginButton.addEventListener("click", function () {
-            let userLogin = document.querySelector("#loginUserName").value;
-            let userPassword = document.querySelector("#loginPassword").value;
-            let dataForServlet = {login:userLogin, password:userPassword};
+            let userLogin = document.querySelector("#loginUserName");
+            let userPassword = document.querySelector("#loginPassword");
+            let dataForServlet = {login:userLogin.value, password:userPassword.value};
             dataHandler.apiPost("/login/check", dataForServlet, function (isARegisteredUser) {
                 if (isARegisteredUser){
                     window.location.href = "http://localhost:8080/";
                 }else{
-                    //window.location.href = "http://localhost:8080/login";
                     let loginMessage = document.querySelector("#loginHelp");
-                    loginMessage.innerHTML = "wrong password";
-
+                    loginMessage.innerHTML = `<font color="red">Invalid username or password</font>`;
+                    userLogin.value = "";
+                    userPassword.value = "";
                 }
             })
         })

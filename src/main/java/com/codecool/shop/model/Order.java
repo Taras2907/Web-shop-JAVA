@@ -13,7 +13,7 @@ public class Order {
 
     public Order() {
         this.id = _id;
-        OrderDaoMem.getInstance().addOrder(this);
+        OrderDaoMem.getInstance().add(this);
         _id++;
     }
 

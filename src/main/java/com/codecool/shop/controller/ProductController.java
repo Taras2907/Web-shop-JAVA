@@ -1,9 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.Dao;
 import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.SupplierDaoMem;
@@ -25,9 +23,9 @@ import java.util.List;
 public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDaoMem = SupplierDaoMem.getInstance();
+        Dao<Product> productDataStore = ProductDaoMem.getInstance();
+        Dao<ProductCategory>  productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        Dao<Supplier> supplierDaoMem = SupplierDaoMem.getInstance();
 
         List<Product> products = productDataStore.getAll();
         List<ProductCategory> categories = productCategoryDataStore.getAll();

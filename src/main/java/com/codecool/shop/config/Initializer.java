@@ -1,9 +1,6 @@
 package com.codecool.shop.config;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.SupplierDaoMem;
@@ -29,10 +26,10 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        UserDao userDataBase = UserDaoMem.getInstance();
+        Dao<Product> productDataStore = ProductDaoMem.getInstance();
+        Dao<ProductCategory> productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        Dao<Supplier> supplierDataStore = SupplierDaoMem.getInstance();
+        Dao<User> userDataBase = UserDaoMem.getInstance();
 
         try { addUsersToDataFromDataBase(userDataBase); }
         catch (SQLException e) { e.printStackTrace(); }
@@ -63,7 +60,7 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Dell XPS", 12700, "PLN", "Dell's XPS laptops are considered the gold standard when it comes to premium notebooks.", laptop, dell));
     }
 
-    private void addUsersToDataFromDataBase(UserDao userDataBase) throws SQLException {
+    private void addUsersToDataFromDataBase(Dao<User> userDataBase) throws SQLException {
         DataSource data = connect();
 
         try {
