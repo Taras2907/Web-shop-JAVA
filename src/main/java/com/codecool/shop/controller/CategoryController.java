@@ -6,7 +6,9 @@ import com.codecool.shop.dao.database.ProductCategoryDaoDB;
 import com.codecool.shop.dao.database.ProductDaoDB;
 import com.codecool.shop.dao.database.SupplierDaoDB;
 import com.codecool.shop.dao.database.UserDaoDB;
+import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
+import com.codecool.shop.dao.implementation.localMemory.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -24,8 +26,8 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/product"})
 public class CategoryController extends HttpServlet {
-    private Dao<ProductCategory> productCategoryDataStore = ProductCategoryDaoDB.getInstance();
-    private Dao<Supplier> supplierDaoMem = SupplierDaoDB.getInstance();
+    private Dao<ProductCategory> productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+    private Dao<Supplier> supplierDaoMem = SupplierDaoMem.getInstance();
 
 
     //setting up users
