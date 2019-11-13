@@ -57,7 +57,7 @@ export let dom = {
 
             table += thisRow;
         }
-        table += `<div class="row justify-content-end no-gutters "><div class="col-4 bg-success text-white rounded "><p class="text-center">Total sum: ${totalSum} PLN</p></div> </div>`;
+        table += `<div class="row justify-content-end no-gutters "><div class="col-4 bg-success text-white rounded "><p class="text-center" style="color: white !important">Total sum: ${totalSum} PLN</p></div> </div>`;
         return table;
     },
     addRelatedProductsToCart:function(){
@@ -145,5 +145,14 @@ export let dom = {
             })
         })
     },
+    addEventListenerToLogoutButton:function () {
+        let logoutButton = document.querySelector("#logOutButton");
+        if (logoutButton !== null){
+            logoutButton.addEventListener("click", function () {
+                dataHandler.userLogout();
+                location.reload();
+            })
+        }
+    }
 
 };

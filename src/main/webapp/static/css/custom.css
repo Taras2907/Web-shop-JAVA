@@ -69,3 +69,6 @@
     background-color: blue !important;
     border-radius: 75px !important;
 }
+.col-4-bg-success-text-white-rounded{
+    color: white !important;
+}
