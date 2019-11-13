@@ -7,6 +7,8 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Order;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,52 +22,57 @@ import java.util.Map;
 
 @WebServlet (urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
+//    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
     private Dao<Product> productDaoMem =  ProductDaoMem.getInstance();
     private Dao<Order> orderDaoMem = OrderDaoMem.getInstance();
-    Order order = new Order();
+    private Order order = new Order();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String employeeJsonString = new Gson().toJson(order.getHashMapArrayListForAjax());
+        String jsonResp = new Gson().toJson(order.getHashMapArrayListForAjax());
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.print(employeeJsonString);
+        out.print(jsonResp);
         out.flush();
     }
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         BufferedReader reader = request.getReader();
-        int testOrder = Integer.parseInt(reader.readLine());
-        Product newProductToOurOrder =  productDaoMem.find(testOrder);
+        int productId = Integer.parseInt(reader.readLine());
+
+//        logger.info("Id of product that should be added to order {}", productId);
+
+        Product newProductToOurOrder =  productDaoMem.find(productId);
+//        logger.info("Product received from database is  {}", newProductToOurOrder);
         orderDaoMem.find(1).addProduct(newProductToOurOrder);
-        System.out.println(orderDaoMem.find(1).getProductList());
+
 
 
         //response for json
-        String employeeJsonString = new Gson().toJson(" everything is ok");
+        String jsonResp = new Gson().toJson(" everything is ok");
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.print(employeeJsonString);
+        out.print(jsonResp);
         out.flush();
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        BufferedReader reader = request.getReader();
-        int testOrder = Integer.parseInt(reader.readLine());
-        Product newProductToOurOrder =  productDaoMem.find(testOrder);
-
-        orderDaoMem.find(testOrder).addProduct(newProductToOurOrder);
-        System.out.println(orderDaoMem.find(testOrder).getProductList());
-
-        //response for json
-        String employeeJsonString = new Gson().toJson(" everything is ok");
-        PrintWriter out = response.getWriter();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        out.print(employeeJsonString);
-        out.flush();
+//        BufferedReader reader = request.getReader();
+//        int productId = Integer.parseInt(reader.readLine());
+//
+//        logger.info("Id of product that should be added to order {}", productId);
+//        Product newProductToOurOrder = productDaoMem.find(productId);
+//        logger.info("Id of product that should be removed from order {}", productId);
+//        orderDaoMem.find(1).addProduct(newProductToOurOrder);
+//
+//        String jsonResp = new Gson().toJson(" everything is ok");
+//        PrintWriter out = response.getWriter();
+//        response.setContentType("application/json");
+//        response.setCharacterEncoding("UTF-8");
+//        out.print(jsonResp);
+//        out.flush();
     }
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -77,17 +84,17 @@ public class CartController extends HttpServlet {
         int productId = myMap.get("id");
         int productQuantity = myMap.get("quantity");
 
-        Product productToRemove =  productDaoMem.find(productId);
-
+//        logger.info("Id of product that should be removed to order is {} and quantity to remove is {}", productId, productQuantity);
+        Product productToRemove = productDaoMem.find(productId);
+//        logger.info("ID of product that should be removed from order is {}", productId);
         orderDaoMem.find(1).removeProduct(productToRemove, productQuantity);// get order number from database
-        System.out.println(orderDaoMem.find(1).getProductList());
 
 //        response for json
-        String employeeJsonString = gson.toJson("200 everything is ok");
+        String jsonResp = gson.toJson("everything is ok");
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.print(employeeJsonString);
+        out.print(jsonResp);
         out.flush();
     }
 

@@ -56,5 +56,10 @@ export let dataHandler = {
         this.apiPost("/login", data, (response)=>{
             callback(response)
         })
+    },
+    userLogout(callback){
+        this.apiGet("/logout", (response)=>{
+            callback(response)
+        })
     }
 };

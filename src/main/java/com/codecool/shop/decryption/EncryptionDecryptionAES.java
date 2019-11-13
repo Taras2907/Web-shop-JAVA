@@ -5,6 +5,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.HashMap;
@@ -12,22 +13,23 @@ import java.util.Map;
 
 public class EncryptionDecryptionAES {
     private Cipher cipher;
+    private SecretKey secretKey;
     private KeyGenerator keyGenerator;
+    private final String keyString = "b5930b522d64d131be87c012b42a77a1";
     private static EncryptionDecryptionAES instance = null;
 
     private void initiate() {
         try{
             cipher = Cipher.getInstance("AES");
             keyGenerator = KeyGenerator.getInstance("AES");
+            secretKey = decSecretKey(keyString);
         }catch (NoSuchPaddingException | NoSuchAlgorithmException e){
             e.printStackTrace();
         }
 
     }
-    public  Map<String, Object> encrypt(String plainText) {
+    public String  encrypt(String plainText) {
         try{
-            SecretKey secretKey = keyGenerator.generateKey();
-
             byte[] plainTextByte = plainText.getBytes();
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             byte[] encryptedByte = cipher.doFinal(plainTextByte);
@@ -38,7 +40,7 @@ public class EncryptionDecryptionAES {
             Map<String, Object> encMap = new HashMap<>();
             encMap.put("secretKey", secretKey);
             encMap.put("encryptedText", encryptedText);
-            return encMap;
+            return encMap.get("encryptedText").toString();
         }catch (Exception e){
             e.printStackTrace();
         }

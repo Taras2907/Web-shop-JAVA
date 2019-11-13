@@ -145,5 +145,14 @@ export let dom = {
             })
         })
     },
+    addEventListenerToLogoutButton:function () {
+        let logoutButton = document.querySelector("#logOutButton");
+        if (logoutButton !== null){
+            logoutButton.addEventListener("click", function () {
+                dataHandler.userLogout();
+                location.reload();
+            })
+        }
+    }
 
 };

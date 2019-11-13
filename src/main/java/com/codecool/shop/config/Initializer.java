@@ -23,7 +23,10 @@ import java.util.function.Function;
 
 @WebListener
 public class Initializer implements ServletContextListener {
+    @Override
+    public void contextDestroyed(ServletContextEvent sce){
 
+    }
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         Dao<Product> productDataStore = ProductDaoMem.getInstance();

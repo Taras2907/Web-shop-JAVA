@@ -27,41 +27,10 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
-    <script type="module" src="static/js/Login.js"></script>
+    <script type="module" src="static/js/login.js"></script>
+    <script type="module" src="static/js/registration.js"></script>
 </head>
 <body>
-
-<!--<script>-->
-<!--    window.fbAsyncInit = function() {-->
-<!--        FB.init({-->
-<!--            appId      : '919584198413176',-->
-<!--            cookie     : true,-->
-<!--            xfbml      : true,-->
-<!--            version    : 'v5.0'-->
-<!--        });-->
-
-<!--        FB.AppEvents.logPageView();-->
-<!--        FB.getLoginStatus(function(response) {-->
-<!--            console.log(response);-->
-<!--        });-->
-
-
-
-
-<!--    };-->
-
-<!--    (function(d, s, id){-->
-<!--        var js, fjs = d.getElementsByTagName(s)[0];-->
-<!--        if (d.getElementById(id)) {return;}-->
-<!--        js = d.createElement(s); js.id = id;-->
-<!--        js.src = "https://connect.facebook.net/en_US/sdk.js";-->
-<!--        fjs.parentNode.insertBefore(js, fjs);-->
-<!--    }(document, 'script', 'facebook-jssdk'));-->
-
-
-<!--</script>-->
-
-<!--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0&appId=919584198413176&autoLogAppEvents=1"></script>-->
 
 <div class="container justify-content-md-center w-50 mt-5 p-5 border rounded">
     <ul class="nav bg-light nav-pills rounded nav-fill mb-3" id="pills-tab" role="tablist">
@@ -93,7 +62,6 @@
 
             <div class="row border-bottom">
                 <div class="col-12">
-                    <form action="/register" method="post">
                         <div class="form-group">
                             <label for="registerName">User Name</label>
                             <input name="name" type="text" class="form-control" id="registerName"
@@ -106,27 +74,18 @@
                                    placeholder="Password" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input name="email" type="email" class="form-control" id="email"
+                            <label for="registerEmail">Email</label>
+                            <input name="email" type="email" class="form-control" id="registerEmail"
                                    placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                         </div>
-                        <button type="submit" class="btn btn-primary" id="registerSubmit">Submit</button>
-                    </form>
+                        <button type="button" class="btn btn-primary" id="registerSubmit">Submit</button>
                 </div>
             </div>
-<!--            <div class="row justify-content-md-center mt-5">-->
-<!--                <div id="fb-root"></div>-->
-<!--                <div class="fb-login-button " data-width="350" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>-->
-<!--            </div>-->
         </div>
     </div>
     </div>
 
 </div>
-
-
-
-
 
 </body>
 </html>

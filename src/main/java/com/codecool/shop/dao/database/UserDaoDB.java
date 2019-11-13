@@ -37,7 +37,38 @@ public class UserDaoDB  implements Dao<User> {
 
     @Override
     public void add(User user) {
+        Connection connection = null;
+        PreparedStatement statement = null;
 
+        try {
+            connection = dataSource.getConnection();
+
+            String sql = "INSERT INTO \"user\"(email, password,order_id, name) " +
+                    "VALUES (?,?,?, ?)";
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getPassword());
+            statement.setInt(3, 1);
+            statement.setString(4, user.getName());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -64,7 +95,7 @@ public class UserDaoDB  implements Dao<User> {
                 Order order = OrderDaoMem.getInstance().find(orderId);
 
 
-                user = new User(userId, email, password, orderId, name);
+                user = new User(email, password, name);
                 user.setId(id);
             }
             resultSet.close();
@@ -119,7 +150,8 @@ public class UserDaoDB  implements Dao<User> {
                 Order order = OrderDaoMem.getInstance().find(orderId);
 
 
-                user = new User(userId, emailDb, password, orderId, name);
+                user = new User( emailDb, password, name);
+                user.setId(userId);
             }
             resultSet.close();
         } catch (SQLException e) {

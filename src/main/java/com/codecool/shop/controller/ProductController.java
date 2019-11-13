@@ -9,6 +9,7 @@ import com.codecool.shop.dao.database.UserDaoDB;
 import com.codecool.shop.dao.implementation.localMemory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.ProductDaoMem;
 import com.codecool.shop.dao.implementation.localMemory.SupplierDaoMem;
+import com.codecool.shop.decryption.EncryptionDecryptionAES;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -26,6 +27,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Dao<Product> productDataStore = ProductDaoDB.getInstance();
