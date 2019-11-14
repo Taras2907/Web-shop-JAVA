@@ -5,11 +5,15 @@ import com.codecool.shop.dao.implementation.localMemory.OrderDaoMem;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Order {
     private Map <Product, Integer>  productList = new HashMap<>();
     private int id;
     private static int _id = 1;
+
+    private static final Logger logger = LoggerFactory.getLogger(Order.class);
 
     public Order() {
         this.id = _id;
@@ -26,14 +30,17 @@ public class Order {
             productList.put(product, productList.get(product) - 1);
         }else {
             productList.remove(product);
+            logger.info("Removed {} from order.", product.getName());
         }
     }
 
     public void addProduct(Product product) {
         if (productList.containsKey(product)){
             productList.put(product, productList.get(product) + 1);
+            logger.info("Added {} to cart", product.getName());
         }else{
             productList.put(product, 1);
+            logger.info("Added {} to cart", product.getName());
         }
     }
 
