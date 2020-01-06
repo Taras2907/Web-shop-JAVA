@@ -60,7 +60,7 @@ export let dom = {
         table += `<div class="row justify-content-end no-gutters "><div class="col-4 bg-success text-white rounded "><p class="text-center" style="color: white !important">Total sum: ${totalSum} PLN</p></div> </div>`;
         return table;
     },
-    addRelatedProductsToCart:function(){
+    addListenerToCarouselButtons:function(){
 
 
     },

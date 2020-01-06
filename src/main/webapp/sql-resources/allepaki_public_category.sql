@@ -1,2 +1,3 @@
+INSERT INTO public.category (id, department, name, description) VALUES (3, 1, 'Accessories', '''Useful accessories for purchased laptops.''');
 INSERT INTO public.category (id, department, name, description) VALUES (2, 1, 'Notebook', '''A computer that is portable and suitable for use while travelling.''');
 INSERT INTO public.category (id, department, name, description) VALUES (1, 1, 'Tablet', '''A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.''');
