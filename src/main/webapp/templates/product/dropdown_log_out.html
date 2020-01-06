@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="copy">
+    <!-- Default dropleft button -->
+    <div class="btn-group dropleft">
+        <button type="button" class="btn btn-secondary dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"
+                th:text= "'Wellcome ' +  ${session.get('user')}">
+        </button>
+        <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Personal data</a>
+            <a class="dropdown-item" href="#">Bank cards</a>
+            <a class="dropdown-item" href="#" id="logOutButton">Log out</a>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

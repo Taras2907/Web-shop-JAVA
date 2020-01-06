@@ -1,13 +1,13 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.localMemory;
 
 
-import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.Dao;
 import com.codecool.shop.model.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoMem implements ProductCategoryDao {
+public class ProductCategoryDaoMem implements Dao<ProductCategory> {
 
     private List<ProductCategory> data = new ArrayList<>();
     private static ProductCategoryDaoMem instance = null;
@@ -34,6 +34,7 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
     public ProductCategory find(int id) {
         return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
+
 
     @Override
     public void remove(int id) {

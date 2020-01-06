@@ -60,3 +60,15 @@
 {
     margin: 0 0 11px;
 }
+.carousel-control-next, .carousel-control-prev
+{
+    width: 50px !important;
+}
+.carousel-control-prev-icon, .carousel-control-next-icon
+{
+    background-color: blue !important;
+    border-radius: 75px !important;
+}
+.col-4-bg-success-text-white-rounded{
+    color: white !important;
+}

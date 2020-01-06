@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/sidebar.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/product_cart.css"/>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <script defer src="static/js/sidebar.js"></script>
+    <script type="module" src="/static/js/Main.js"></script>
+
+
+    <title>Sidebar</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3><a href="/">Allepaki</a></h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>Let us know what you're looking for</p>
+                <li class="active">
+                    <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
+                    <ul class="collapse list-unstyled " id="categoriesSubmenu">
+                        <li th:each="category,iterStat : ${categories}">
+                            <a th:href="@{/product(category=${category.getId()})}" th:text="${category.getName()}">Category...</a>
+                        </li>
+                    </ul>
+                    <a href="#suppliersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Suppliers</a>
+                    <ul class="collapse list-unstyled " id="suppliersSubmenu">
+                        <li th:each="supplier,iterStat : ${suppliers}">
+                            <a th:href="@{/product(supplier=${supplier.getId()})}" th:text="${supplier.getName()}">Supplier..</a>
+                        </li>
+                        <!--                        <li>-->
+                        <!--                            <a href="#">Home 2</a>-->
+                        <!--                        </li>-->
+                        <!--                        <li>-->
+                        <!--                            <a href="#">Home 3</a>-->
+                        <!--                        </li>-->
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+
+        <!-- Page content -->
+        <div id="content">
+            <div th:replace="topnav.html:: copy"></div>
+            <div class="card" th:if="${category != null}">
+                <strong th:text="${category.name}">Category Title</strong>
+            </div>
+
+            <div class="container-fluid">
+                <div id="products" class="row pl-3 pr-3">
+                    <div class="col col-sm-12 col-md-6 col-lg-3 mb-3 " th:each="prod,iterStat : ${products}">
+                        <div class="card">
+                            <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                            <div class="card-header">
+                                <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                                <p class="card-text truncate-overflow" th:text="${prod.description}">Product description... </p>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                                </div>
+                                <div class="card-text">
+                                    <button class="btn btn-primary white"th:data-id="${prod.id}">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="/product/modal_cart.html:: copy"></div>
+
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

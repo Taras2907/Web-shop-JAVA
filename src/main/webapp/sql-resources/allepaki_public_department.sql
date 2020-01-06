@@ -1,0 +1,1 @@
+INSERT INTO public.department (id, name) VALUES (1, 'AGD');

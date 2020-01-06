@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/payment.css"/>
+
+<!--    <script defer src="/static/js/credit-card.js"></script>-->
+    <script defer src="/static/js/cleave.js"></script>
+    <script defer src="/static/js/payment_form.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+
+        <div class="col-sm-6">
+            <div class="card mt-5">
+                <div class="card-body p-5 ">
+
+                    <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#nav-tab-card">
+                                <i class="fa fa-credit-card"></i> Credit Card</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#nav-tab-paypal">
+                                <i class="fab fa-paypal"></i> Paypal</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#nav-tab-bank">
+                                <i class="fa fa-university"></i> Bank Transfer</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="nav-tab-card">
+                            <p class="alert alert-success" hidden>
+                                Payment confirmed. You will be now redirected to the home page.
+                            </p>
+
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="name">Card owner</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder=""
+                                               required/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cardNumber">Card number</label>
+                                    <div class="input-group">
+                                        <input class="form-control creditcard" type="text" id="cardNumber" name="cardNumber"
+                                               required minlength="15"/>
+                                        <div class="input-group-append">
+                                    <span class="input-group-text text-muted">
+                                        <i class="fab fa-cc-visa pr-1"></i><i class="fab fa-cc-amex pr-1"></i><i
+                                            class="fab fa-cc-mastercard"></i>
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label><span class="hidden-xs">Expiration</span> </label>
+                                            <div class="form-inline">
+                                                <select class="form-control" name="month" id="month" required>
+                                                    <option disabled selected>MM</option>
+                                                    <option>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                    <option>04</option>
+                                                    <option>05</option>
+                                                    <option>06</option>
+                                                    <option>07</option>
+                                                    <option>08</option>
+                                                    <option>09</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                </select>
+                                                <span class="text-center pr-1 pl-1"> / </span>
+                                                <select class="form-control" name="year" id="year" required>
+                                                    <option disabled selected>YY</option>
+                                                    <option th:each="year : ${#numbers.sequence(#dates.year(#dates.createNow()), #dates.year(#dates.createNow()) + 7)}"
+                                                            th:text="${year}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label data-toggle="tooltip" title=""
+                                                   data-original-title="3 digits code on back side of the card">CVV <i
+                                                    class="fa fa-question-circle"></i></label>
+                                            <input class="form-control cvv" required type="text" minlength="3" maxlength="3"/>
+                                        </div>
+                                    </div>
+                                </div> <!-- row.// -->
+                                <button class="subscribe btn btn-primary btn-block" type="submit" id="submit-button"> Confirm</button>
+                                <button type="button" class="btn btn-secondary btn-block" id="cancel-button">Cancel</button>
+                            </form>
+                        </div> <!-- tab-pane.// -->
+
+                        <div class="tab-pane fade" id="nav-tab-paypal">
+                            <p>Paypal is the easiest way to pay online</p>
+                            <p>
+                                <button type="button" class="btn btn-primary"><i class="fab fa-paypal"></i> Log in my
+                                    Paypal
+                                </button>
+                            </p>
+                            <p><strong>Note:</strong> Logging in through our form can lead to leakage of your personal
+                                data. Please continue tough. </p>
+                        </div>
+                        <div class="tab-pane fade" id="nav-tab-bank">
+                            <p>Transfer details</p>
+                            <dl class="param">
+                                <dt>BANK:</dt>
+                                <dd>THE VERY HONEST BANK</dd>
+                            </dl>
+                            <dl class="param">
+                                <dt>Account number:</dt>
+                                <dd> 12345678912345</dd>
+                            </dl>
+                            <dl class="param">
+                                <dt>IBAN:</dt>
+                                <dd> 123456789</dd>
+                            </dl>
+                            <p><strong>Note:</strong>
+                                We do not guarantee that money will be transferred. </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
