@@ -1,7 +1,7 @@
 # Web Shop
 
 
-This web shop is a regular online shop where customer can add products to the cart, filter them by producer or category, edit products in cart and pay for them using simulation of payment form. Additiionally cart have option to offer customers suplements to ordered products (database part and html are ready to use).
+This web shop is a regular online shop where customer can add products to the cart, filter them by producer or category, edit products in cart and pay for them using simulation of payment form. Addittionally cart have option to offer customers supplements to ordered products (database part and html are ready to use).
 
 Tech stack: JAVASCRIPT, WEBSERVLETS, AJAX, JAVA 8, POSTGRESQL
 
